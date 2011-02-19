@@ -35,6 +35,7 @@
 #include <QAtomicInt>
 #include "qdebug.h"
 #include "qbuffer.h"
+#include <QtEndian>
 
 QT_BEGIN_NAMESPACE
 
@@ -295,6 +296,15 @@ QPixmap QIcnsIconEnginePrivate::bestPixmap(const QSize &requestedSize,
 		return QPixmap();	
 
 	QByteArray rgb = imageBuffers.value(hashKey(mode, state, iconSize));
+#if Q_BYTE_ORDER == Q_BIG_ENDIAN
+	if (rgb.length() % 4)
+		return QPixmap();
+	quint32 *rgbbuf = reinterpret_cast<quint32 *>(rgb.data());
+	for (int i = 0; i < rgb.length()/4; i++) {
+		rgbbuf[i] = qFromLittleEndian(rgbbuf[i]);
+	}
+#endif
+
 	if (!rgb.isNull()) {
 		QImage img = QImage(reinterpret_cast<const uchar *>(rgb.constData()),
 		                    iconSize.width(), iconSize.height(),
