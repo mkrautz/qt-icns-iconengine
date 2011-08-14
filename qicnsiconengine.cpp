@@ -77,7 +77,7 @@ public:
 	QByteArray decompressIconData(const QByteArray &rawIconData,
 	                              int npixels) const;
 
-	QPixmap bestPixmap(const QSize &size, QIcon::Mode state,
+	QPixmap bestPixmap(const QSize &size, QIcon::Mode mode,
 	                   QIcon::State state);
 
 	QHash<int, QString> iconFiles;
