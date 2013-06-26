@@ -1,10 +1,13 @@
-TEMPLATE = lib
-VERSION = 1.0.0
 TARGET = qicnsicon
-CONFIG += qt plugin debug_and_release
+QT += gui widgets
+
+PLUGIN_TYPE = iconengines
+PLUGIN_CLASS_NAME = QIcnsIconPlugin
+load(qt_plugin)
 
 HEADERS += qicnsiconengine.h
 SOURCES += main.cpp qicnsiconengine.cpp
+OTHER_FILES += qicnsiconengine.json
 
 CONFIG(universal) {
   CONFIG += x86 ppc

@@ -32,7 +32,7 @@ QT_BEGIN_NAMESPACE
 
 class QIcnsIconEnginePrivate;
 
-class QIcnsIconEngine : public QIconEngineV2
+class QIcnsIconEngine : public QIconEngine
 {
 public:
     QIcnsIconEngine();
@@ -51,7 +51,7 @@ public:
                  QIcon::Mode mode, QIcon::State state);
 
     QString key() const;
-    QIconEngineV2 *clone() const;
+    QIconEngine *clone() const;
     bool read(QDataStream &in);
     bool write(QDataStream &out) const;
 

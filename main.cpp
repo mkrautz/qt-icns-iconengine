@@ -35,11 +35,14 @@
 
 QT_BEGIN_NAMESPACE
 
-class QIcnsIconPlugin : public QIconEnginePluginV2
+class QIcnsIconPlugin : public QIconEnginePlugin
 {
+	Q_OBJECT
+	Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QIconEngineFactoryInterface" FILE "qicnsiconengine.json")
+
 public:
     QStringList keys() const;
-    QIconEngineV2 *create(const QString &filename = QString());
+    QIconEngine *create(const QString &filename = QString());
 };
 
 QStringList QIcnsIconPlugin::keys() const
@@ -47,7 +50,7 @@ QStringList QIcnsIconPlugin::keys() const
     return QStringList(QLatin1String("icns"));
 }
 
-QIconEngineV2 *QIcnsIconPlugin::create(const QString &file)
+QIconEngine *QIcnsIconPlugin::create(const QString &file)
 {
     QIcnsIconEngine *engine = new QIcnsIconEngine;
     if (!file.isNull())
@@ -55,8 +58,7 @@ QIconEngineV2 *QIcnsIconPlugin::create(const QString &file)
     return engine;
 }
 
-Q_EXPORT_STATIC_PLUGIN(QIcnsIconPlugin)
-Q_EXPORT_PLUGIN2(qicnsicon, QIcnsIconPlugin)
+#include "main.moc"
 
 QT_END_NAMESPACE
 

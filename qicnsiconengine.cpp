@@ -96,7 +96,7 @@ QIcnsIconEngine::QIcnsIconEngine()
 }
 
 QIcnsIconEngine::QIcnsIconEngine(const QIcnsIconEngine &other)
-    : QIconEngineV2(other), d(new QIcnsIconEnginePrivate)
+    : QIconEngine(other), d(new QIcnsIconEnginePrivate)
 {
 	d->iconFiles = other.d->iconFiles;
 	d->imageBuffers = other.d->imageBuffers;
@@ -368,7 +368,7 @@ QString QIcnsIconEngine::key() const
 	return QLatin1String("icns");
 }
 
-QIconEngineV2 *QIcnsIconEngine::clone() const
+QIconEngine *QIcnsIconEngine::clone() const
 {
 	return new QIcnsIconEngine(*this);
 }
